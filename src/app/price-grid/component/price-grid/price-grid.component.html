@@ -1,0 +1,45 @@
+<h2>Price Grid Management</h2>
+
+<form #priceForm="ngForm" (ngSubmit)="save()">
+  <table>
+    <tr>
+      <td><label>Height:</label></td>
+      <td><input type="number" [(ngModel)]="priceGrid.height" name="height" required></td>
+    </tr>
+    <tr>
+      <td><label>Width:</label></td>
+      <td><input type="number" [(ngModel)]="priceGrid.width" name="width" required></td>
+    </tr>
+    <tr>
+      <td><label>Price:</label></td>
+      <td><input type="number" [(ngModel)]="priceGrid.price" name="price" required></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: center;">
+        <button type="submit" [disabled]="priceForm.invalid">Save</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+<hr>
+
+<div class="price-grid-container">
+  <table class="price-grid-table">
+    <thead>
+      <tr>
+        <th>Height / Width</th>
+        <th *ngFor="let width of uniqueWidths">{{ width }}"</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let height of uniqueHeights; let i = index" [class.highlight-row]="i % 2 === 1">
+        <td>{{ height }}"</td>
+        <td *ngFor="let width of uniqueWidths">
+          {{ getPrice(height, width) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
