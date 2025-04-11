@@ -49,11 +49,16 @@ button:disabled {
   margin: 20px;
 }
 
-.price-grid-table {
+.price-grid-table th,
+.price-grid-table td {
   width: auto;
   border-collapse: collapse;
   text-align: center;
-
+  grid-column: unset;
+  border-bottom: 1px solid #ccc; /* Only horizontal lines */
+  border-left: none !important;  /* Remove left border */
+  border-right: none !important; /* Remove right border */
+}
   th, td {
     border: 1px solid #ccc;
     padding: 12px 20px;
@@ -62,11 +67,58 @@ button:disabled {
   }
 
   th {
-    background-color: #e0e0e0;
+    background-color: lightsteelblue;
     font-weight: 600;
   }
 
   .highlight-row {
-    background-color: #f1f1f1; /* Alternate row highlighting */
+    background-color: lightsteelblue; /* Alternate row highlighting */
   }
+
+  .price-grid-table th:first-child,
+.price-grid-table td:first-child {
+  border-left: none;
+  border-right: none;
+}
+
+.price-grid-table th:last-child,
+.price-grid-table td:last-child {
+  border-right: none;
+  border-left:none;
+  border: none !important;
+}
+
+.vertical-header {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+  border:none;
+  text-orientation:mixed;
+}
+
+.height-to-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; 
+  text-align: center;
+}
+
+.height-to-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  border:none;
+}
+
+.height-value {
+  padding-top: 8px;
 }

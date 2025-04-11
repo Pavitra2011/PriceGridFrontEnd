@@ -1,26 +1,4 @@
-<h2>Price Grid Management</h2>
 
-<form #priceForm="ngForm" (ngSubmit)="save()">
-  <table>
-    <tr>
-      <td><label>Height:</label></td>
-      <td><input type="number" [(ngModel)]="priceGrid.height" name="height" required></td>
-    </tr>
-    <tr>
-      <td><label>Width:</label></td>
-      <td><input type="number" [(ngModel)]="priceGrid.width" name="width" required></td>
-    </tr>
-    <tr>
-      <td><label>Price:</label></td>
-      <td><input type="number" [(ngModel)]="priceGrid.price" name="price" required></td>
-    </tr>
-    <tr>
-      <td colspan="2" style="text-align: center;">
-        <button type="submit" [disabled]="priceForm.invalid">Save</button>
-      </td>
-    </tr>
-  </table>
-</form>
 
 
 <hr>
@@ -28,16 +6,40 @@
 <div class="price-grid-container">
   <table class="price-grid-table">
     <thead>
+
       <tr>
-        <th>Height / Width</th>
-        <th *ngFor="let width of uniqueWidths">{{ width }}"</th>
+        <th  [attr.rowspan]="uniqueHeights.length">WIDTHTO</th>
+        
+        <th *ngFor="let width of uniqueWidths; let j = index">
+          {{ j === 0 ? width + '"' : width }}
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let height of uniqueHeights; let i = index" [class.highlight-row]="i % 2 === 1">
-        <td>{{ height }}"</td>
-        <td *ngFor="let width of uniqueWidths">
-          {{ getPrice(height, width) }}
+        <td>
+          <div class="height-to-container">
+            <div *ngIf="i === uniqueHeights.length/2" class="height-to-text">
+              HEIGHT TO
+            </div>
+            <div class="height-value">
+              {{ i === 0 ? height + '"' : height }}
+            </div>
+        </div>    
+          
+        </td>
+  <!--  <tbody>
+      <tr *ngFor="let height of uniqueHeights; let i = index" [class.highlight-row]="i % 2 === 1">
+        <td>
+          <div *ngIf="i == uniqueHeights.length/2" class="vertical-header" [attr.rowspan]="uniqueHeights.length">
+            Height To
+          </div>
+          <div>
+            {{ height }}" 
+          </div>
+        </td>-->
+        <td *ngFor="let width of uniqueWidths; let j = index">
+          {{ (i === 0 && j === 0) ? ('$' + getPrice(height, width)) : getPrice(height, width) }}
         </td>
       </tr>
     </tbody>
